@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Administrar noticias · Trabenco-Pozo</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="admin-page">
+  <main class="admin-shell">
+    <a class="text-link" href="/">← Volver a la web</a>
+    <div class="eyebrow"><span></span> Panel editorial</div>
+    <h1>Publicar una noticia</h1>
+    <p>Las publicaciones nuevas aparecerán automáticamente en la portada.</p>
+    <form id="news-form" class="admin-form" enctype="multipart/form-data">
+      <label>Token de administración<input name="token" type="password" required autocomplete="current-password"></label>
+      <label>Título<input name="title" type="text" required></label>
+      <label>Categoría y fecha<input name="category" type="text" placeholder="COLEGIO · SEPTIEMBRE 2026"></label>
+      <label>Resumen<textarea name="excerpt" rows="4" required></textarea></label>
+      <label>Enlace de la noticia<input name="url" type="url" placeholder="https://trabenco-pozo.es/..."></label>
+      <label>Imagen<input name="image" type="file" accept="image/*"></label>
+      <button class="btn btn-dark" type="submit">Publicar noticia ↗</button>
+      <p id="form-status" role="status"></p>
+    </form>
+  </main>
+  <script>
+    const form = document.querySelector('#news-form');
+    const status = document.querySelector('#form-status');
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      status.textContent = 'Publicando...';
+      const response = await fetch('/api/news', { method: 'POST', body: new FormData(form) });
+      const result = await response.json();
+      status.textContent = response.ok ? 'Noticia publicada correctamente.' : result.error;
+      if (response.ok) form.reset();
+    });
+  </script>
+</body>
+</html>

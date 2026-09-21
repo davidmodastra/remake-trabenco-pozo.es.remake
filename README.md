@@ -1,21 +1,19 @@
-# Trabenco-Pozo — Remake moderno
+# Trabenco-Pozo
 
-Remake estático en HTML + CSS + JavaScript, inspirado en la estructura y contenidos públicos actuales de Colegio Trabenco-Pozo.
+Web del Colegio Trabenco-Pozo con noticias administrables y formulario de contacto.
 
 ## Ejecutar
-Abre `index.html` directamente en el navegador o usa Live Server.
 
-## Estructura
-- index.html
-- styles.css
-- script.js
+Requiere Node.js 18 o superior.
 
-## Importante
-Las fotografías del demo usan imágenes remotas de Unsplash. Para una web real, sustituye esas URLs por fotografías para las que el colegio tenga derechos de uso.
+```powershell
+npm install
+$env:ADMIN_TOKEN = "cambia-este-token"
+npm start
+```
 
-El formulario es solo frontend: hay que conectarlo a WordPress, PHP, Formspree, Supabase, etc.
+Abre `http://localhost:3000`. El panel editorial está en `http://localhost:3000/admin.html`.
 
-## Siguiente paso
-Se puede separar en páginas reales:
-`/colegio`, `/etapas`, `/proyecto-educativo`, `/noticias`, `/admisión`, `/familias`, `/contacto`
-y añadir un CMS/login para administrar noticias y documentos.
+Las noticias se guardan en `data/news.json`, las imágenes nuevas en `uploads/` y los mensajes de contacto en `data/messages.json`. El token se debe definir como variable de entorno y no se debe subir al repositorio.
+
+Si se abre `index.html` directamente, la portada conserva las noticias de respaldo y los enlaces externos, pero el panel y el formulario necesitan el servidor.

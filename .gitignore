@@ -32,6 +32,10 @@ wp-config.php
 # Log files
 *.log
 
+# Local data created by the news backend
+/uploads/
+/data/messages.json
+
 # htaccess
 /.htaccess
 
